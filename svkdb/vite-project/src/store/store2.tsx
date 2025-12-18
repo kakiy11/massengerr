@@ -1,45 +1,68 @@
-import { createContext } from "react";
-import { create } from "zustand";
+// src/store/simpleStore.ts
+import { create } from 'zustand';
 
-export type MessageType = {
-	id: string;
-	chatId: string;
-	text: string;
-	senderId: string;
-};
-type ChatType = {
-	id: string
-	username: string
-	avatar: string
+interface ChatType {
+  id: string;
+  name: string;
+  avatar: string;
+  lastMessage?: string;
 }
-interface MessagesStore {
-	messages: MessageType[];
-	addMessage: (newMessage: MessageType) => void;
-	updateMessage: (messageId: string, text: string) => void;
+
+interface MessageType {
+  id: string;
+  chatId: string;
+  text: string;
+  senderId: string;
 }
-interface AppContextType{
-	chats: ChatType[]
+
+interface ChatStore {
+  chats: ChatType[];
+  messages: MessageType[];
+  currentChatId: string | null;
+  setCurrentChat: (chatId: string) => void;
+  addMessage: (message: MessageType) => void;
+  getCurrentChat: () => ChatType | null;
+  getChatMessages: (chatId: string) => MessageType[];
 }
-const AppContext = createContext<AppContextType>
-export const useMessage = create<MessagesStore>((set) => ({
-	messages: [],
-	addMessage: (newMessage: MessageType) => {
-		set((state) => ({
-			messages: [...state.messages, newMessage],
-		}));
-	},
-	updateMessage: (messageId: string, text: string) => {
-		set((state) => ({
-			messages: state.messages.map((message) =>
-				message.id === messageId ? { ...message, text } : message
-			),
-		}));
-	},
+
+export const useChatStore = create<ChatStore>((set, get) => ({
+  chats: [
+    { id: '1', name: 'Алексей', avatar: '🙄', lastMessage: 'Привет! Как дела?' },
+    { id: '2', name: 'Мария', avatar: '😎', lastMessage: 'Встречаемся завтра' },
+    { id: '3', name: 'Команда проекта', avatar: '👥', lastMessage: 'Новые задачи готовы' },
+  ],
+  
+  messages: [
+    { id: '1', chatId: '1', text: 'Привет! Как дела?', senderId: 'alexey' },
+    { id: '2', chatId: '1', text: 'Всё отлично, спасибо!', senderId: 'user' },
+    { id: '3', chatId: '2', text: 'Встречаемся завтра', senderId: 'maria' },
+  ],
+  
+  currentChatId: null,
+  
+  setCurrentChat: (chatId: string) => {
+    set({ currentChatId: chatId });
+  },
+  
+  addMessage: (message: MessageType) => {
+    set((state) => ({
+      messages: [...state.messages, message],
+      chats: state.chats.map(chat => 
+        chat.id === message.chatId 
+          ? { ...chat, lastMessage: message.text }
+          : chat
+      )
+    }));
+  },
+  
+  getCurrentChat: () => {
+    const state = get();
+    if (!state.currentChatId) return null;
+    return state.chats.find(chat => chat.id === state.currentChatId) || null;
+  },
+  
+  getChatMessages: (chatId: string) => {
+    const state = get();
+    return state.messages.filter(msg => msg.chatId === chatId);
+  }
 }));
-function App(){
-	return (
-		<AppContext.Provider>
-
-		</AppContext.Provider>
-	)
-}

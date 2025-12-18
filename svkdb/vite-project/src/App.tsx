@@ -7,11 +7,10 @@ const App = () => {
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Navigate to="/main" replace />} />
-				<Route path="/main" element={<MenuPage /> } />
+				<Route path="/main" element={<MenuPage />} />
 				<Route path="/sign_in" element={<LoginPage />} />
 			</Routes>
 		</BrowserRouter>
-		
 	);
 };
 

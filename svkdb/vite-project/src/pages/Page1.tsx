@@ -17,8 +17,7 @@ function Page1() {
                         required
                     />
                     <label className={styles.inputLabel}>Email Address</label>
-                </div>
-                
+                </div> 
                 <div className={styles.inputGroup}>
                     <input 
                         className={styles.inputField} 

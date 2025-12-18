@@ -5,7 +5,6 @@
 	display: flex;
 	font-family: Arial, sans-serif;
 }
-
 .messengercontainer {
 	background-color: #1e1e1e;
 	color: white;
@@ -15,12 +14,10 @@
 	font-family: Arial, sans-serif;
 	overflow-y: scroll
 }
-
 .masseges_wraper{
 	height: fit-content;
 	display: flex;
-	flex-direction: column;
-	
+	flex-direction: column;	
 }
 .userpanel {
 	width: 100%;
@@ -29,10 +26,8 @@
 	display: flex;
 	align-items: center;
 	gap: 15px;
-
 	border-bottom: 1px solid #444;
 }
-
 .avatar {
 	width: 40px;
 	height: 40px;
@@ -44,26 +39,22 @@
 	font-weight: bold;
 	color: white;
 }
-
 .username {
 	font-size: 16px;
 	font-weight: bold;
 	color: #fff;
 }
-
 .chatlist {
 	width: 30%;
 	min-height: 100vh;
 	background-color: #2d2d2d;
 	border-right: 1px solid #444;
 }
-
 .chats {
 	margin: 20px;
 	color: #fff;
 	font-size: 24px;
 }
-
 .search {
 	width: calc(100% - 40px);
 	height: 36px;
@@ -80,7 +71,6 @@
 .barnames {
 	width: 100%;
 }
-
 .user1,
 .user2,
 .user3,
@@ -281,11 +271,6 @@
 	font-weight: bold;
 	color: #fff;
 }
-
-.messages {
-
-}
-
 .message {
 	align-self: flex-end;
 	background-color: #007bff;
@@ -296,10 +281,7 @@
 	word-wrap: break-word;
 	margin-left: auto;
 }
-
 .inputarea {
-	
-
 	display: flex;
 	gap: 10px;
 	padding: 15px 20px;
@@ -308,7 +290,6 @@
 	margin-top: auto;
 	width: 80vw;
 }
-
 .messageinput {
 	flex: 1;
 	padding: 12px 16px;
@@ -317,4 +298,3 @@
 	outline: none;
 	font-size: 14px;
 }
-
